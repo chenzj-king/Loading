@@ -21,7 +21,10 @@ public class LoadingDialog extends Dialog {
     }
 
     public static LoadingDialog newInstance(Context context, CharSequence charSequence, boolean cancelable) {
+        return newInstance(context, charSequence, cancelable, true);
+    }
 
+    public static LoadingDialog newInstance(Context context, CharSequence charSequence, boolean cancelable, boolean isAutoShow) {
         LoadingDialog loadingDialog = new LoadingDialog(context, R.style.LoadingDialog);
         loadingDialog.setTitle("");
         loadingDialog.setContentView(R.layout.dialog_loading);
@@ -32,11 +35,13 @@ public class LoadingDialog extends Dialog {
             ((TextView) loadingDialog.findViewById(R.id.tip_tv)).setText(charSequence);
         }
         loadingDialog.setCancelable(cancelable);
-        loadingDialog.show();
+        if (isAutoShow) {
+            loadingDialog.show();
+        }
         return loadingDialog;
     }
 
-    public void onWindowFocusChanged(boolean isShowAnima) {
+    public void onWindowFocusChanged(boolean isShowAnimation) {
         ((AnimationDrawable) findViewById(R.id.spinner_iv).getBackground()).start();
     }
 

@@ -3,7 +3,10 @@ package com.sq580.lib.loading;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 
@@ -27,7 +30,9 @@ public class LoadingDialog extends Dialog {
     public static LoadingDialog newInstance(Context context, CharSequence charSequence, boolean cancelable, boolean isAutoShow) {
         LoadingDialog loadingDialog = new LoadingDialog(context, R.style.LoadingDialog);
         loadingDialog.setTitle("");
-        loadingDialog.setContentView(R.layout.dialog_loading);
+
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
+        loadingDialog.setContentView(dialogView);
 
         if (charSequence == null || charSequence.length() == 0) {
             loadingDialog.findViewById(R.id.tip_tv).setVisibility(View.GONE);
@@ -35,6 +40,24 @@ public class LoadingDialog extends Dialog {
             ((TextView) loadingDialog.findViewById(R.id.tip_tv)).setText(charSequence);
         }
         loadingDialog.setCancelable(cancelable);
+
+        //计算高度
+        int w = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        int h = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        dialogView.measure(w, h);
+        int width = dialogView.getMeasuredWidth();
+        int height = dialogView.getMeasuredHeight();
+
+        if (width * 0.9 > height) {
+            Window window = loadingDialog.getWindow();
+            WindowManager.LayoutParams lp = window.getAttributes();
+            lp.width = width;
+            lp.height = (int) (width * 0.9);
+            window.setAttributes(lp);
+        }
+
+
+        //是否自动显示对话框
         if (isAutoShow) {
             loadingDialog.show();
         }

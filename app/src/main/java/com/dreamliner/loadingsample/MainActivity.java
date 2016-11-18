@@ -12,6 +12,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LoadingDialog.newInstance(this, "登录中...", false);
+        LoadingDialog.newInstance(this, "获取支付信息中...", false);
     }
 }

@@ -48,14 +48,14 @@ public class LoadingDialog extends Dialog {
         int width = dialogView.getMeasuredWidth();
         int height = dialogView.getMeasuredHeight();
 
+        Window window = loadingDialog.getWindow();
+        WindowManager.LayoutParams lp = window.getAttributes();
         if (width * 0.9 > height) {
-            Window window = loadingDialog.getWindow();
-            WindowManager.LayoutParams lp = window.getAttributes();
             lp.width = width;
             lp.height = (int) (width * 0.9);
             window.setAttributes(lp);
         }
-
+        window.setLayout(width, height);
 
         //是否自动显示对话框
         if (isAutoShow) {

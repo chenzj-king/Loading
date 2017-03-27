@@ -6,7 +6,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 
@@ -49,14 +48,13 @@ public class LoadingDialog extends Dialog {
         int height = dialogView.getMeasuredHeight();
 
         Window window = loadingDialog.getWindow();
-        WindowManager.LayoutParams lp = window.getAttributes();
-        if (width * 0.9 > height) {
-            lp.width = width;
-            lp.height = (int) (width * 0.9);
-            window.setAttributes(lp);
+        if (window != null) {
+            if (width * 0.9 > height) {
+                window.setLayout(width, (int) (width * 0.9));
+            } else {
+                window.setLayout(width, height);
+            }
         }
-        window.setLayout(width, height);
-
         //是否自动显示对话框
         if (isAutoShow) {
             loadingDialog.show();

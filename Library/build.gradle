@@ -7,12 +7,12 @@ def bintrayUserVal = properties.getProperty('bintrayUser')
 def bintrayKeyVal = properties.getProperty('bintrayKey')
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
@@ -27,7 +27,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.3.0'
+    compile 'com.android.support:appcompat-v7:27.1.0'
 }
 
 tasks.withType(Javadoc) {
@@ -39,7 +39,7 @@ publish {
     userOrg = 'chenzj-king'
     groupId = 'com.sq580.lib'
     artifactId = 'loading'
-    publishVersion = '1.1.0'
+    publishVersion = '1.2.0'
     desc = 'Oh hi, this is a nice description for a project, right?'
     website = 'https://github.com/chenzj-king/Loading'
     bintrayUser = bintrayUserVal

@@ -6,6 +6,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -63,7 +64,7 @@ public class LoadingDialog extends Dialog {
     }
 
     public void onWindowFocusChanged(boolean isShowAnimation) {
-        ((AnimationDrawable) findViewById(R.id.spinner_iv).getBackground()).start();
+        ((AnimationDrawable) ((ImageView) findViewById(R.id.spinner_iv)).getDrawable()).start();
     }
 
 }

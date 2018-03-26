@@ -21,9 +21,10 @@
         <ImageView
             android:id="@+id/spinner_iv"
             android:layout_width="wrap_content"
+            android:background="#ff404040"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/ic_logo_loading"
+            android:src="@drawable/ic_logo_loading"
             />
 
         <TextView

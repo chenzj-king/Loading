@@ -24,10 +24,22 @@ public class LoadingDialog extends Dialog {
     }
 
     public static LoadingDialog newInstance(Context context, CharSequence charSequence, boolean cancelable) {
-        return newInstance(context, charSequence, cancelable, true);
+        return newInstance(context, charSequence, cancelable, true, null, null);
     }
 
-    public static LoadingDialog newInstance(Context context, CharSequence charSequence, boolean cancelable, boolean isAutoShow) {
+    public static LoadingDialog newInstance(Context context, CharSequence charSequence, boolean cancelable,
+                                            OnCancelListener onCancelListener) {
+        return newInstance(context, charSequence, cancelable, true, onCancelListener, null);
+    }
+
+    public static LoadingDialog newInstance(Context context, CharSequence charSequence, boolean cancelable,
+                                            OnCancelListener onCancelListener, OnDismissListener onDismissListener) {
+        return newInstance(context, charSequence, cancelable, true, onCancelListener, onDismissListener);
+    }
+
+    public static LoadingDialog newInstance(Context context, CharSequence charSequence, boolean cancelable,
+                                            boolean isAutoShow, OnCancelListener onCancelListener,
+                                            OnDismissListener onDismissListener) {
         LoadingDialog loadingDialog = new LoadingDialog(context, R.style.LoadingDialog);
         loadingDialog.setTitle("");
 

@@ -27,6 +27,10 @@ public class LoadingDialog extends Dialog {
         return newInstance(context, charSequence, cancelable, true, null, null);
     }
 
+    public static LoadingDialog newInstance(Context context, CharSequence charSequence, boolean cancelable, boolean isAutoShow) {
+        return newInstance(context, charSequence, cancelable, isAutoShow, null, null);
+    }
+
     public static LoadingDialog newInstance(Context context, CharSequence charSequence, boolean cancelable,
                                             OnCancelListener onCancelListener) {
         return newInstance(context, charSequence, cancelable, true, onCancelListener, null);
@@ -72,11 +76,22 @@ public class LoadingDialog extends Dialog {
         if (isAutoShow) {
             loadingDialog.show();
         }
+        if (null != onCancelListener) {
+            loadingDialog.setOnCancelListener(onCancelListener);
+        }
+        if (null != onDismissListener) {
+            loadingDialog.setOnDismissListener(onDismissListener);
+        }
         return loadingDialog;
     }
 
-    public void onWindowFocusChanged(boolean isShowAnimation) {
-        ((AnimationDrawable) ((ImageView) findViewById(R.id.spinner_iv)).getDrawable()).start();
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            ((AnimationDrawable) ((ImageView) findViewById(R.id.spinner_iv)).getDrawable()).start();
+        } else {
+            ((AnimationDrawable) ((ImageView) findViewById(R.id.spinner_iv)).getDrawable()).stop();
+        }
     }
-
 }
